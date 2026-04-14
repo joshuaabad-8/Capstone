@@ -1,0 +1,31 @@
+@model DailyRoutineApp.Models.Routine
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>@Model.Title</h1>
+<p><strong>Date:</strong> @Model.Date.ToShortDateString()</p>
+@if(!string.IsNullOrWhiteSpace(Model.Notes)){
+  <p><strong>Notes:</strong> @Model.Notes</p>
+}
+<h3>Activities</h3>
+<table class="table">
+  <thead><tr><th>#</th><th>Time</th><th>Name</th><th>Duration</th><th>Notes</th></tr></thead>
+  <tbody>
+@foreach(var a in Model.Activities){
+  <tr>
+    <td>@a.Id</td>
+    <td>@a.Time.ToString("hh\\:mm")</td>
+    <td>@a.Name</td>
+    <td>@a.DurationMinutes min</td>
+    <td>@a.Notes</td>
+  </tr>
+}
+  </tbody>
+</table>
+<p>
+  <a class="btn btn-primary" href="/Routine">Back</a>
+  <a class="btn btn-secondary ms-2" href="/Routine/Edit/@Model.Id">Edit</a>
+  <form method="post" action="/Routine/Delete/@Model.Id" style="display:inline">
+    <button type="submit" class="btn btn-danger ms-2" onclick="return confirm('Delete this routine?');">Delete</button>
+  </form>
+</p>

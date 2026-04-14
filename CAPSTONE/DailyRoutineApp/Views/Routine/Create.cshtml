@@ -1,0 +1,47 @@
+@model DailyRoutineApp.Models.Routine
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Create Routine</h1>
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Title</label>
+    <input name="Title" class="form-control" />
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Date</label>
+    <input type="date" name="Date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+  </div>
+  <div class="col-12">
+    <label class="form-label">Notes</label>
+    <textarea name="Notes" class="form-control" rows="2"></textarea>
+  </div>
+  <hr />
+  <h4>Activities (up to 6)</h4>
+@for(int i=0;i<6;i++){
+  <div class="border rounded p-3 mb-2">
+    <div class="row g-2">
+      <div class="col-md-5">
+        <label class="form-label">Name</label>
+        <input name="Activities[@i].Name" class="form-control" />
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Time</label>
+        <input type="time" name="Activities[@i].Time" class="form-control" />
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Duration (min)</label>
+        <input type="number" name="Activities[@i].DurationMinutes" class="form-control" />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Notes</label>
+        <input name="Activities[@i].Notes" class="form-control" />
+      </div>
+    </div>
+  </div>
+}
+  <div class="col-12">
+    <button type="submit" class="btn btn-success">Save Routine</button>
+    <a class="btn btn-secondary" href="/Routine">Cancel</a>
+  </div>
+</form>

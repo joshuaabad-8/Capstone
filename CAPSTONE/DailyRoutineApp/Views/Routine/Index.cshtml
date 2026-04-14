@@ -1,0 +1,25 @@
+@model IEnumerable<DailyRoutineApp.Models.Routine>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Saved Routines</h1>
+<p><a class="btn btn-primary" href="/Routine/Create">Create New Routine</a></p>
+<table class="table table-striped">
+  <thead><tr><th>Title</th><th>Date</th><th>Activities</th><th></th></tr></thead>
+  <tbody>
+@foreach(var r in Model) {
+  <tr>
+    <td>@r.Title</td>
+    <td>@r.Date.ToShortDateString()</td>
+    <td>@r.Activities.Count</td>
+    <td>
+      <a class="btn btn-sm btn-outline-primary me-1" href="/Routine/Details/@r.Id">View</a>
+      <a class="btn btn-sm btn-outline-secondary me-1" href="/Routine/Edit/@r.Id">Edit</a>
+      <form method="post" action="/Routine/Delete/@r.Id" style="display:inline">
+        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this routine?');">Delete</button>
+      </form>
+    </td>
+  </tr>
+}
+  </tbody>
+</table>
